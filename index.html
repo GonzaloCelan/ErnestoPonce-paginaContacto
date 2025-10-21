@@ -31,12 +31,12 @@
   body{
     margin:0; background:var(--bg); color:var(--ink);
     font-family:Poppins, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-    line-height:1.4; display:grid; place-items:center;
-    padding:16px;
-    padding-left:max(16px, env(safe-area-inset-left));
-    padding-right:max(16px, env(safe-area-inset-right));
-    padding-top:max(16px, env(safe-area-inset-top));
-    padding-bottom:max(16px, env(safe-area-inset-bottom));
+    line-height:1.4; display:block; place-items:center;
+    padding-left:max(0px, env(safe-area-inset-left));
+    padding-right:max(0px, env(safe-area-inset-right));
+    padding-top:max(0px, env(safe-area-inset-top));
+    padding-bottom:max(0px, env(safe-area-inset-bottom));
+    overflow-x:hidden;  
   }
   .phone{
     width:100%; max-width:420px; background:var(--card);
@@ -44,7 +44,7 @@
   }
   /* COVER con imagen y tinte */
   .cover{
-    position:relative; height:170px; isolation:isolate;
+    position:relative; height:150px; isolation:isolate;
     background: var(--cover) 58% center / cover no-repeat;
   }
   .cover::before{
@@ -57,19 +57,88 @@
   /* AVATAR por encima del cover y la curva */
   .avatar{
     position:relative; width:112px; height:112px; border-radius:999px;
-    background:var(--white); padding:6px; margin:-62px auto 8px; z-index:4;
+    background:var(--white); padding:4px; margin:-40px auto 8px; z-index:4;
     box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px,
                 rgba(0, 0, 0, 0.3) 0px 7px 13px -3px,
                 rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
   }
   .avatar img{ width:100%; height:100%; object-fit:cover; border-radius:999px; }
 
+  /* === HALO animado alrededor del logo === */
+.avatar{ isolation:isolate; } /* permite capas internas sin mezclar z-index */
+.avatar img{ position:relative; z-index:1; } /* el logo siempre arriba */
+
+/* Anillo de luz rotando */
+.avatar::before{
+  content:"";
+  position:absolute;
+  inset:-6px;                                 /* cuánto sale hacia afuera */
+  border-radius:999px;
+  pointer-events:none;
+  background:
+    conic-gradient(from 0deg,
+      rgba(18,194,255,.55), rgba(23,135,255,.55), rgba(14,165,255,.55), rgba(18,194,255,.55));
+  opacity:.25;                                 /* tenue, para que no parezca borde */
+  filter: blur(10px) saturate(1.1);
+  /* anillo (donut): solo se ve el borde, no el círculo lleno */
+  -webkit-mask: radial-gradient(closest-side, transparent calc(100% - 14px), #000 calc(100% - 14px));
+          mask: radial-gradient(closest-side, transparent calc(100% - 14px), #000 calc(100% - 14px));
+  animation: halo-rotate 9s linear infinite;
+  z-index:0;
+}
+
+
+.avatar::after{
+  content:"";
+  position:absolute;
+  inset:-30px;                                 
+  border-radius:999px;
+  pointer-events:none;
+  
+  background:
+    radial-gradient(circle 6px , rgba(56,189,248,.95), rgba(56,189,248,0) 70%) 50% -12px / auto auto no-repeat,
+    radial-gradient(circle 5px , rgba(56,189,248,.9) , rgba(56,189,248,0) 70%) calc(50% + 52px) 50% / auto auto no-repeat,
+    radial-gradient(circle 6px , rgba(56,189,248,.95), rgba(56,189,248,0) 70%) 50% calc(100% + 12px) / auto auto no-repeat,
+    radial-gradient(circle 5px , rgba(56,189,248,.9) , rgba(56,189,248,0) 70%) calc(50% - 52px) 50% / auto auto no-repeat,
+
+    radial-gradient(circle 4.5px, rgba(125,211,252,.95), rgba(125,211,252,0) 70%) calc(50% + 44px) calc(50% - 26px) / auto auto no-repeat,
+    radial-gradient(circle 4.5px, rgba(14,165,233,.95) , rgba(14,165,233,0) 70%) calc(50% - 44px) calc(50% + 26px) / auto auto no-repeat,
+
+    radial-gradient(circle 4.5px, rgba(56,189,248,.95), rgba(56,189,248,0) 70%) calc(50% + 26px) calc(50% - 44px) / auto auto no-repeat,
+    radial-gradient(circle 4.5px, rgba(56,189,248,.95), rgba(56,189,248,0) 70%) calc(50% - 26px) calc(50% + 44px) / auto auto no-repeat,
+
+    radial-gradient(circle 4px , rgba(125,211,252,.95), rgba(125,211,252,0) 70%) calc(50% + 46px) calc(50% + 16px) / auto auto no-repeat,
+    radial-gradient(circle 4px , rgba(125,211,252,.95), rgba(125,211,252,0) 70%) calc(50% - 46px) calc(50% - 16px) / auto auto no-repeat,
+
+    radial-gradient(circle 4px , rgba(14,165,233,.95) , rgba(14,165,233,0) 70%) calc(50% + 18px) calc(50% + 48px) / auto auto no-repeat,
+    radial-gradient(circle 4px , rgba(14,165,233,.95) , rgba(14,165,233,0) 70%) calc(50% - 18px) calc(50% - 48px) / auto auto no-repeat;
+  filter: drop-shadow(0 0 10px rgba(56,189,248,.75)) drop-shadow(0 0 4px rgba(56,189,248,.7));
+  animation:
+    sparkle-rotate 9s linear infinite,
+    sparkle-flicker 1.8s ease-in-out infinite alternate;
+  z-index:5;  /* sobre el aro tenue, bajo la imagen */
+}
+
+@keyframes halo-rotate   { to { transform: rotate(360deg); } }
+@keyframes sparkle-rotate{ to { transform: rotate(360deg); } }
+@keyframes sparkle-flicker{
+  0%{   opacity:.55; transform: scale(1);    }
+  35%{  opacity:1;    transform: scale(1.06);}
+  70%{  opacity:.45;  transform: scale(.98); }
+  100%{ opacity:.7;   transform: scale(1);   }
+}
+
+@media (prefers-reduced-motion: reduce){
+  .avatar::before,.avatar::after{ animation:none; }
+}
+
   /* CONTENIDO con borde superior CURVO (unión real) */
   .content{
-    position:relative; z-index:1; background:var(--card);
-    margin-top:-70px; padding: calc(70px + 8px) 20px 22px;
-    border-top-left-radius: 999px 130px; border-top-right-radius: 999px 130px;
-  }
+  position:relative; z-index:1; background:var(--card);
+  border-radius:0;
+  margin-top: -70px;
+  padding: 76px 20px 22px;
+}
 
   /* Títulos y subtítulos */
   h1{ margin:6px 0 0; text-align:center; font-weight:700; font-size:24px; letter-spacing:.2px; }
@@ -81,20 +150,75 @@
     line-height:1.55; color:#334155; min-height:3.2em;
     opacity:0; transform:translateY(6px);
     transition:opacity .45s ease, transform .45s ease;
+    letter-spacing: 3px;
   }
   .desc.reveal{ opacity:1; transform:none; }
   .desc .cursor{ display:inline-block; width:.66ch; border-right:2px solid #3b82f6; transform:translateY(2px); animation:blink 1s step-end infinite; }
   @keyframes blink { 50% { border-color: transparent; } }
 
-  /* Redes */
-  .social{ display:flex; justify-content:center; gap:14px; margin:6px 0 18px; }
-  .social a{
-    display:grid; place-items:center; width:44px; height:44px;
-    border-radius:12px; background:var(--white); color:#111; text-decoration:none;
-    border:1px solid rgba(0,0,0,.06); box-shadow:0 8px 18px rgba(0,0,0,.08);
-    transition: transform .14s cubic-bezier(.2,.7,.2,1), box-shadow .18s ease;
+  /* Redes (mejor estilo + efectos) */
+.social{
+  display:flex; justify-content:center; gap:14px;
+  margin:6px 0 18px;
+}
+.social a{
+  position:relative;
+  display:grid; place-items:center;
+  width:48px; height:48px;                 /* objetivo táctil 44px+ */
+  border-radius:14px;
+  background:#fff;
+  color:#0f172a;                            /* se hereda al SVG (currentColor) */
+  text-decoration:none;
+  border:1px solid rgba(0,0,0,.06);
+  box-shadow:0 8px 18px rgba(0,0,0,.08);
+  transition:
+    transform .14s cubic-bezier(.2,.7,.2,1),
+    box-shadow .18s ease,
+    filter .18s ease,
+    opacity .18s ease;
+  overflow:hidden;
+}
+.social a svg{ width:22px; height:22px; }
+
+/* Hover/press (si lo abren en desktop también) */
+@media (hover:hover){
+  .social a:hover{
+    transform:translateY(-1px) scale(1.05);
+    box-shadow:0 16px 28px rgba(23,135,255,.18);
   }
-  .social a:active{ transform:scale(.96); box-shadow:0 6px 12px rgba(0,0,0,.12); }
+}
+.social a:active{ transform:scale(.95); box-shadow:0 6px 12px rgba(0,0,0,.12); }
+
+/* Anillo sutil */
+.social a::before{
+  content:""; position:absolute; inset:0; border-radius:inherit;
+  box-shadow:0 0 0 0 rgba(23,135,255,0);
+  transition:box-shadow .2s ease;
+}
+@media (hover:hover){
+  .social a:hover::before{ box-shadow:0 0 0 8px rgba(23,135,255,.08); }
+}
+
+/* Colores de marca en los íconos */
+#instagram{ color:#E1306C; }
+#facebook{  color:#1877F2; }
+#tiktok{    color:#000000; }
+#youtube{   color:#FF0000; }
+#twitter{   color:#1DA1F2; }
+
+/* Estado deshabilitado para redes que aún no tenés */
+.social a.is-disabled{
+  background:#f6f7fb;
+  border:1px dashed #d5dbe3;
+  box-shadow:none;
+  filter:grayscale(1) opacity(.7);
+  cursor:not-allowed;
+}
+.social a.is-disabled::after{
+  content:"Próx.";
+  position:absolute; right:6px; bottom:4px;
+  font-size:10px; letter-spacing:.2px; color:#64748b;
+}
 
   /* Botones principales */
   .links{ display:grid; gap:14px; margin:18px 0; }
