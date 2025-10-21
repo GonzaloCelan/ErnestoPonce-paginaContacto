@@ -16,8 +16,35 @@
     lat: -31.5375, lng: -68.5364,
   };
 
-  const iconsWrap = document.querySelector('.social');
-  const linksWrap = document.querySelector('.links');
+  // Marcar elementos que entran al cargar
+const cover  = document.querySelector('.cover');
+const avatar = document.querySelector('.avatar');
+const title  = document.querySelector('h1');
+const roleEl = document.querySelector('.role');
+[cover, avatar, title, roleEl].forEach(el => el.classList.add('will-reveal'));
+
+// Contenedores para cascada
+const iconsWrap = document.querySelector('.social');
+const linksWrap = document.querySelector('.links');
+[iconsWrap, linksWrap].forEach(el => el.classList.add('stagger'));
+
+// Helpers de animación
+function reveal(el, delay=0){
+  if(!el) return;
+  setTimeout(()=> el.classList.add('show'), delay);
+}
+function cascadeReveal(container, step=90, start=0){
+  if(!container) return;
+  const items = Array.from(container.children);
+  items.forEach((item, i) => {
+    item.style.transition = (item.style.transition ? item.style.transition+',' : '')
+                          + ' opacity .45s ease, transform .45s ease';
+    item.style.transitionDelay = `${start + i*step}ms`;
+  });
+  container.classList.add('show');
+  const total = start + items.length*step + 600;
+  setTimeout(()=> items.forEach(it => it.style.transitionDelay=''), total);
+}
   [iconsWrap, linksWrap].forEach(el => el.classList.add('stagger'));
 
   // Utilidad: revela los hijos en cascada
@@ -66,15 +93,28 @@ document.getElementById('whatsapp').href = `https://wa.me/${DATA.whatsappE164}?t
       else { await navigator.clipboard.writeText(DATA.site); alert('Enlace copiado ✔'); } } catch(e){}
   });
 
+  // Lanzamos la entrada inicial coordinada
+const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+if (reduceMotion){
+  // sin animaciones
+  [cover, avatar, title, roleEl].forEach(el => el && el.classList.add('show'));
+} else {
+  requestAnimationFrame(() => {
+    reveal(cover,   60);   // portada
+    reveal(avatar, 160);   // logo
+    reveal(title,  280);   // h1
+    reveal(roleEl, 360);   // subtítulo
+  });
+}
+
   // Descripción: efecto typewriter + fade-in
-  (function runDescription(){
-  const el = document.getElementById('desc');
+ (function runDescription(){
+  const el  = document.getElementById('desc');
   const txt = DATA.description;
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   requestAnimationFrame(() => el.classList.add('reveal'));
 
-  // Accesibilidad: sin animaciones -> mostramos todo de una
   if (reduce){
     el.textContent = txt;
     cascadeReveal(iconsWrap, 0, 0);
@@ -82,35 +122,27 @@ document.getElementById('whatsapp').href = `https://wa.me/${DATA.whatsappE164}?t
     return;
   }
 
-  // Typewriter con leve jitter
   el.textContent = '';
   const cur = document.createElement('span');
   cur.className = 'cursor';
   cur.setAttribute('aria-hidden','true');
   el.appendChild(cur);
 
-  let i = 0;
-  const base = 22; // ms
-
-  function type() {
-    if (i < txt.length) {
+  let i = 0, base = 22;
+  (function type(){
+    if (i < txt.length){
       cur.insertAdjacentText('beforebegin', txt[i++]);
       setTimeout(type, base + Math.random()*40);
     } else {
       cur.remove();
-
-      // --- cuando termina de escribir, revelamos en cascada:
-      // primero iconos, luego botones con un poco más de delay
-      const ICON_STEP = 80;
+      // Cuando termina de escribir -> cascada
+      const ICON_STEP  = 80;
       const LINKS_STEP = 90;
-
       cascadeReveal(iconsWrap, ICON_STEP, 120);
-      // esperamos a que arranquen los iconos y encadenamos los botones
       const afterIcons = 120 + iconsWrap.children.length * ICON_STEP + 150;
       cascadeReveal(linksWrap, LINKS_STEP, afterIcons);
     }
-  }
-  setTimeout(type, 220); // pequeño delay tras el fade
+  })();
 })();
 
   // ==== Efecto de botones: scale (mobile) ====
