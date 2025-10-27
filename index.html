@@ -2,76 +2,105 @@
 <html lang="es">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1  viewport-fit=cover" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
   <title>La Fábrica 3D — Contacto</title>
-  <meta name="description" content="Tarjeta QR de La Fábrica 3D: catálogo, redes y contacto directo." />
-  <meta name="color-scheme" content="light">
-  <meta name="supported-color-schemes" content="light">
-  <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f2f5ff">
-  <meta name="theme-color" media="(prefers-color-scheme: dark)"  content="#f2f5ff">
-  <meta property="og:title" content="La Fábrica 3D — Contacto" />
-  <meta property="og:description" content="Impresión 3D y prototipado rápido. Entrá al catálogo o escribinos por WhatsApp." />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://lafabrica3d.ar/qr" />
-  <meta property="og:image" content="logo-512.png" />
-  <link rel="icon" href="favicon.ico" />
 
-  <!-- Tipografía -->
+  <!-- Tipografías -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css" />
- 
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Sora:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./style.css" />
+
 </head>
 <body>
-  <main class="phone" aria-label="Tarjeta de contacto">
-    <div class="cover" aria-hidden="true"></div>
+  <main class="wrap">
+    <figure class="avatar coin float" aria-label="Logo La Fábrica 3D">
+      <img src="./images/logo.jpg" alt="Logo La Fábrica 3D">
+    </figure>
 
-    <div class="avatar">
-      <img src="./images/logo.jpg" alt="Logo La Fábrica 3D" onerror="this.src='logo-512.png'">
+    <h1 class="fx">La Fábrica 3D</h1>
+    <div class="sub fx">IMPRESIÓN 3D</div>
+
+    <!-- Descripción con TYPEWRITER -->
+    <p class="desc fx" aria-label="Descripción">
+      <span class="line" style="--n:30">Nuestras impresiones son solo impresiones</span>
+      <span class="line" style="--n:31">“hasta que tú les das vida”.</span>
+      <span class="line" style="--n:27">La Fábrica 3D </span>
+      <span class="line" style="--n:30">busca el punto exacto de tu idea</span>
+      <span class="line" style="--n:27">¡Lo soñás, lo tenés!</span>
+      <span class="line" style="--n:24">Envíos a todo el país.</span>
+    </p>
+
+    <!-- Botones -->
+    <nav class="links" aria-label="Enlaces principales">
+      <a class="btn fx btn--wa" href="https://wa.me/5492645298045?text=Hola%21%20Vengo%20desde%20la%20tarjeta%20digital%20de%20contacto." target="_blank" rel="noopener noreferrer">
+        <span class="ico" aria-hidden="true">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path fill="currentColor" d="M20 12a8 8 0 1 0-14.32 4.91L5 21l4.2-1.11A8 8 0 0 0 20 12Z"/>
+            <path fill="currentColor" d="M8.5 9.5c.2-.6.8-1 1.4-.9l.1.1 1 1.7c.1.2.1.5-.1.7l-.4.4c.7 1.2 1.7 2.1 2.9 2.7l.4-.4c.2-.2.5-.2.7-.1l1.7 1c.6.3.8 1 .5 1.6-.5.9-1.4 1.1-2.3.9-3.1-.8-5.6-3.2-6.4-6.3-.2-.9 0-1.8.5-2.4Z"/>
+          </svg>
+        </span>
+        WhatsApp
+      </a>
+
+      <a class="btn fx btn--ig" href="https://instagram.com/LFABRICA_3D" target="_blank" rel="noopener noreferrer">
+        <span class="ico" aria-hidden="true">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <defs>
+              <linearGradient id="igGradBtn" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%"  stop-color="var(--ig1)"/>
+                <stop offset="40%" stop-color="var(--ig2)"/>
+                <stop offset="70%" stop-color="var(--ig3)"/>
+                <stop offset="100%" stop-color="var(--ig4)"/>
+              </linearGradient>
+            </defs>
+            <rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="url(#igGradBtn)" stroke-width="2"/>
+            <circle cx="12" cy="12" r="4" fill="none" stroke="url(#igGradBtn)" stroke-width="2"/>
+            <circle cx="17.5" cy="6.5" r="1.25" fill="url(#igGradBtn)" stroke="none"/>
+          </svg>
+        </span>
+        Instagram
+      </a>
+
+      <a class="btn fx btn--map" href="https://www.google.com/maps?q=G%C3%BCemes%20306%20Sur%2C%20San%20Juan%2C%20Argentina" target="_blank" rel="noopener noreferrer">
+        <span class="ico" aria-hidden="true">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M12 22s7-6.2 7-12a7 7 0 0 0-14 0c0 5.8 7 12 7 12Z" fill="none" stroke="currentColor" stroke-width="2"/>
+            <circle cx="12" cy="10" r="2.5" fill="currentColor" stroke="none"/>
+          </svg>
+        </span>
+        Ubicación
+      </a>
+
+      <a class="btn fx btn--mail" href="mailto:ernes_ponce01@hotmail.com?subject=Consulta%20%E2%80%94%20La%20F%C3%A1brica%203D&body=Hola%2C%20quisiera%20hacer%20una%20consulta%20sobre%20impresión%203D." target="_blank" rel="noopener noreferrer">
+        <span class="ico" aria-hidden="true">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M4 6h16a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2Z" fill="none" stroke="currentColor" stroke-width="2"/>
+            <path d="m3 8 9 6 9-6" fill="none" stroke="currentColor" stroke-width="2"/>
+          </svg>
+        </span>
+        Email
+      </a>
+    </nav>
+
+    <!-- Redes -->
+    <div class="social fx" aria-label="Redes">
+      <a href="https://wa.me/5492645298045?text=Hola%21%20Vengo%20desde%20la%20tarjeta%20digital%20de%20contacto." target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+        <svg viewBox="0 0 24 24"><path d="M20 12a8 8 0 1 0-14.32 4.91L5 21l4.2-1.11A8 8 0 0 0 20 12Z"/><path d="M8.5 9.5c.2-.6.8-1 1.4-.9l.1.1 1 1.7c.1.2.1.5-.1.7l-.4.4c.7 1.2 1.7 2.1 2.9 2.7l.4-.4c.2-.2.5-.2.7-.1l1.7 1c.6.3.8 1 .5 1.6-.5.9-1.4 1.1-2.3.9-3.1-.8-5.6-3.2-6.4-6.3-.2-.9 0-1.8.5-2.4Z"/></svg>
+      </a>
+      <a href="https://instagram.com/LFABRICA_3D" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+        <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.25" fill="currentColor" stroke="none"/></svg>
+      </a>
+      <a href="mailto:ernes_ponce01@hotmail.com?subject=Consulta%20%E2%80%94%20La%20F%C3%A1brica%203D&body=Hola%2C%20quisiera%20hacer%20una%20consulta%20sobre%20impresión%203D." target="_blank" rel="noopener noreferrer" aria-label="Email">
+        <svg viewBox="0 0 24 24"><path d="M4 6h16a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2Z" fill="none" stroke="currentColor"/><path d="m3 8 9 6 9-6" fill="none" stroke="currentColor"/></svg>
+      </a>
+      <a href="https://www.google.com/maps?q=G%C3%BCemes%20306%20Sur%2C%20San%20Juan%2C%20Argentina" target="_blank" rel="noopener noreferrer" aria-label="Ubicación">
+        <svg viewBox="0 0 24 24"><path d="M12 22s7-6.2 7-12a7 7 0 0 0-14 0c0 5.8 7 12 7 12Z" fill="none" stroke="currentColor"/><circle cx="12" cy="10" r="2.5" fill="currentColor" stroke="none"/></svg>
+      </a>
     </div>
 
-    <div class="content">
-      <h1>La Fábrica 3D</h1>
-      <div class="role">IMPRESIÓN 3D</div>
-
-      <p id="desc" class="desc" aria-live="polite"></p>
-
-      <nav class="social" aria-label="Redes sociales">
-        <a id="tiktok" href="#" target="_blank" aria-label="TikTok" rel="noopener">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.9 3c.6 2.4 2.6 4.2 5 4.6v3.1c-1.7 0-3.3-.5-4.6-1.4v6.2a5.5 5.5 0 1 1-5.5-5.4c.4 0 .8 0 1.1.1v3.2c-.3-.1-.7-.2-1.1-.2a2.2 2.2 0 1 0 2.2 2.2V3h2.9z"/></svg>
-        </a>
-        <a id="youtube" href="#" target="_blank" aria-label="YouTube" rel="noopener">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.6 3.5 12 3.5 12 3.5s-7.6 0-9.4.6A3 3 0 0 0 .5 6.2 31.7 31.7 0 0 0 0 12c0 1.9.2 3.8.5 5.8a3 3 0 0 0 2.1 2.1C4.4 20.4 12 20.4 12 20.4s7.6 0 9.4-.6a3 3 0 0 0 2.1-2.1c.3-2 .5-3.9.5-5.8zM9.6 15.3V8.7l6 3.3-6 3.3z"/></svg>
-        </a>
-        <a id="twitter" href="#" target="_blank" aria-label="Twitter" rel="noopener">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 5.8c-.7.3-1.5.6-2.2.7.8-.5 1.4-1.2 1.7-2.1-.8.5-1.7.9-2.6 1.1a3.7 3.7 0 0 0-6.3 3.4A10.5 10.5 0 0 1 3 4.9a3.7 3.7 0 0 0 1.1 4.9c-.6 0-1.2-.2-1.8-.5 0 1.8 1.3 3.4 3.1 3.8-.5.2-1 .2-1.5.1.4 1.5 1.9 2.6 3.6 2.6A7.4 7.4 0 0 1 2 18.4a10.5 10.5 0 0 0 16.1-8.9v-.5c.7-.5 1.4-1.2 1.9-2z"/></svg>
-        </a>
-        <a id="facebook" href="#" target="_blank" aria-label="Facebook" rel="noopener">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 22v-8h2.6l.4-3H13V9.1c0-.9.2-1.5 1.6-1.5H16V5.1c-.3 0-1.2-.1-2.1-.1-2.1 0-3.5 1.3-3.5 3.6V11H8v3h2.4v8h2.6z"/></svg>
-        </a>
-        <a id="instagram" href="#" target="_blank" aria-label="Instagram" rel="noopener">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm5 4.5A4.5 4.5 0 1 0 16.5 11 4.5 4.5 0 0 0 12 6.5zm5-1a1 1 0 1 0 1 1 1 1 0 0 0-1-1z"/></svg>
-        </a>
-      </nav>
-
-      <div class="links">
-         <a class="link" id="presupuesto" href="#" target="_blank" rel="noopener">Pedir Presupuesto</a>
-        <a class="link" id="whatsapp" href="#" target="_blank" rel="noopener">Contactarme</a>
-        <a class="link" id="ubicacion" href="#" target="_blank" rel="noopener">Ubicación</a>
-        <a class="link" id="catalogo" href="#" target="_blank" rel="noopener">Mi Catálogo</a>
-        <a class="link" id="tienda" href="#" target="_blank" rel="noopener">Visitar Tienda Online</a>
-       
-      </div>
-
-      <div class="made">© <span id="year"></span> La Fábrica 3D</div>
-    </div>
+    <div class="note fx">© La Fábrica 3D</div>
   </main>
-
-  <!-- FAB -->
-  <button class="fab" type="button" title="Compartir" id="shareBtn" aria-label="Compartir">
-    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M14 9V5l7 7-7 7v-4H4v-6z"/></svg>
-  </button>
 
   <script src="./index.js"></script>
 </body>
